@@ -30,9 +30,11 @@ jobs:
       - name: Run tarpaulin
         run: cargo tarpaulin --engine Llvm --out Html --output-dir coverage
 
+      - run: mv coverage/tarpaulin-report.html coverage/tarpaulin-report-${{ matrix.os }}.html
+
       - name: Upload coverage report
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: tarpaulin-report-${{ matrix.os }}
-          path: coverage/tarpaulin-report.html
+          path: coverage/tarpaulin-report-${{ matrix.os }}.html
