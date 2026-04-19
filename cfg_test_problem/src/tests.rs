@@ -4,10 +4,8 @@
 
 use super::*;
 
-struct TestHelper;
-
-fn test_helper() {
-    println!("from test_helper");
+pub fn test_helper() {
+    println!("this shouldn't be marked as un-covered as it's in a #[cfg(test)] module!");
 }
 
 #[test]

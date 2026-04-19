@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "tarpaulin_test"
+name = "loop_problem"
 version = "0.1.0"

@@ -1,0 +1,7 @@
+[workspace]
+resolver = "3"
+members = [
+    "cfg_test_problem",
+    "loop_problem",
+    "match_arm_problem",
+]

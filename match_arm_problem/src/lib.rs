@@ -1,16 +1,16 @@
 fn ret_generic<S>() -> bool {
     match true {
         _ => {
-            // Above line is not covered according to tarpaulin
+            // Above line is NOT covered according to tarpaulin
             true
         }
     }
 }
 
 fn assign_generic_named<S>() {
-    let a = match true {
+    let _a = match true {
         _ => {
-            // Above line is not covered according to tarpaulin
+            // Above line is NOT covered according to tarpaulin
             true
         }
     };
@@ -19,7 +19,7 @@ fn assign_generic_named<S>() {
 fn void_generic<S>() {
     match true {
         _ => {
-            // Above line IS covered according to tarpaulin
+            // Above line is correctly covered
             true;
         }
     }
@@ -28,7 +28,7 @@ fn void_generic<S>() {
 fn assign_generic_underscore<S>() {
     let _ = match true {
         _ => {
-            // Above line IS covered according to tarpaulin
+            // Above line is correctly covered
             true
         }
     };
@@ -37,16 +37,16 @@ fn assign_generic_underscore<S>() {
 fn ret_mono() -> bool {
     match true {
         _ => {
-            // ???
+            // Above line is correctly covered
             true
         }
     }
 }
 
 fn assign_mono_named() {
-    let a = match true {
+    let _a = match true {
         _ => {
-            // ???
+            // Above line is correctly covered
             true
         }
     };
@@ -55,7 +55,7 @@ fn assign_mono_named() {
 fn void_mono() {
     match true {
         _ => {
-            // ???
+            // Above line is correctly covered
             true;
         }
     }
@@ -64,7 +64,7 @@ fn void_mono() {
 fn assign_mono_underscore() {
     let _ = match true {
         _ => {
-            // ???
+            // Above line is correctly covered
             true
         }
     };
