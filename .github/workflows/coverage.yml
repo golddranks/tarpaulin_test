@@ -24,4 +24,11 @@ jobs:
           which cargo-tarpaulin || cargo install cargo-tarpaulin@0.35.2 --locked
 
       - name: Run tarpaulin
-        run: cargo tarpaulin
+        run: cargo tarpaulin --out Html --output-dir coverage
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: tarpaulin-report
+          path: coverage/tarpaulin-report.html
