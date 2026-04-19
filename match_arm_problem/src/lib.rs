@@ -1,4 +1,4 @@
-fn ret_generic<S>() -> bool {
+pub fn ret_generic<S>() -> bool {
     match true {
         _ => {
             // Above line is NOT covered according to tarpaulin
@@ -7,7 +7,7 @@ fn ret_generic<S>() -> bool {
     }
 }
 
-fn assign_generic_named<S>() {
+pub fn assign_generic_named<S>() {
     let _a = match true {
         _ => {
             // Above line is NOT covered according to tarpaulin
@@ -16,7 +16,7 @@ fn assign_generic_named<S>() {
     };
 }
 
-fn void_generic<S>() {
+pub fn void_generic<S>() {
     match true {
         _ => {
             // Above line is correctly covered
@@ -25,7 +25,7 @@ fn void_generic<S>() {
     }
 }
 
-fn assign_generic_underscore<S>() {
+pub fn assign_generic_underscore<S>() {
     let _ = match true {
         _ => {
             // Above line is correctly covered
@@ -34,7 +34,7 @@ fn assign_generic_underscore<S>() {
     };
 }
 
-fn ret_mono() -> bool {
+pub fn ret_mono() -> bool {
     match true {
         _ => {
             // Above line is correctly covered
@@ -43,7 +43,7 @@ fn ret_mono() -> bool {
     }
 }
 
-fn assign_mono_named() {
+pub fn assign_mono_named() {
     let _a = match true {
         _ => {
             // Above line is correctly covered
@@ -52,7 +52,7 @@ fn assign_mono_named() {
     };
 }
 
-fn void_mono() {
+pub fn void_mono() {
     match true {
         _ => {
             // Above line is correctly covered
@@ -61,7 +61,7 @@ fn void_mono() {
     }
 }
 
-fn assign_mono_underscore() {
+pub fn assign_mono_underscore() {
     let _ = match true {
         _ => {
             // Above line is correctly covered
@@ -71,9 +71,10 @@ fn assign_mono_underscore() {
 }
 
 #[test]
-fn match_problem() {
+pub fn match_problem() {
+    use std::hint::black_box;
     // Problem cases
-    ret_generic::<()>();
+    black_box(ret_generic::<()>());
     assign_generic_named::<()>();
 
     // No problem with generic + ignored values
@@ -81,7 +82,7 @@ fn match_problem() {
     assign_generic_underscore::<()>();
 
     // No problem with any monomorphic cases
-    ret_mono();
+    black_box(ret_mono());
     assign_mono_named();
     void_mono();
     assign_mono_underscore();
