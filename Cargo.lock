@@ -7,6 +7,10 @@ name = "cfg_test_problem"
 version = "0.1.0"
 
 [[package]]
+name = "closure_arg_problem"
+version = "0.1.0"
+
+[[package]]
 name = "loop_problem"
 version = "0.1.0"
 

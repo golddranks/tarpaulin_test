@@ -1,7 +1,32 @@
+pub const OP_TEXT: u8 = 0x1;
+pub const OP_BINARY: u8 = 0x2;
+
+pub fn or_pattern<S>(opcode: u8) -> bool {
+    match opcode {
+        OP_TEXT | OP_BINARY => {
+            return false;
+        }
+        _ => return false,
+    }
+}
+
 pub fn ret_generic<S>() -> bool {
     match true {
         _ => {
             // Above line is NOT covered according to tarpaulin
+            true
+        }
+    }
+}
+
+// Probe to distinguish whether LLVM anchors the missing region to the pattern
+// line or the brace line. Pattern, arrow, and brace are on three separate
+// lines; whichever comes back uncovered tells us where LLVM fails to anchor.
+pub fn ret_generic_split<S>() -> bool {
+    match true {
+        _
+        =>
+        {
             true
         }
     }
@@ -138,6 +163,7 @@ pub fn match_problem() {
     use std::hint::black_box;
     // Problem cases
     black_box(ret_generic::<()>());
+    black_box(ret_generic_split::<()>());
     assign_generic_named::<()>();
     ret_generic_assign::<()>();
 
@@ -162,4 +188,9 @@ pub fn match_problem() {
     assign_mono_named();
     void_mono();
     assign_mono_underscore();
+
+    // New cases
+    black_box(or_pattern::<()>(OP_TEXT));
+    black_box(or_pattern::<()>(OP_BINARY));
+    black_box(or_pattern::<()>(99));
 }

@@ -2,6 +2,7 @@
 resolver = "3"
 members = [
     "cfg_test_problem",
+    "closure_arg_problem",
     "loop_problem",
     "match_arm_problem",
 ]
