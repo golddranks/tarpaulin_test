@@ -7,6 +7,24 @@ pub fn ret_generic<S>() -> bool {
     }
 }
 
+struct Test {
+    a: bool,
+    b: (),
+}
+
+pub fn ret_generic_inert_assign<S>(t: Test) -> bool {
+    match t {
+        Test { a: true, b: () } => {
+            // Above line is NOT covered according to tarpaulin
+            true
+        }
+        Test { a: false, b: () } => {
+            // Above line is NOT covered according to tarpaulin
+            true
+        }
+    }
+}
+
 pub fn ret_generic_assign<S>() -> bool {
     match true {
         a => {
@@ -122,6 +140,9 @@ pub fn match_problem() {
     black_box(ret_generic::<()>());
     assign_generic_named::<()>();
     ret_generic_assign::<()>();
+
+    ret_generic_inert_assign::<()>(Test { a: true, b: () });
+    ret_generic_inert_assign::<()>(Test { a: false, b: () });
 
     foo::<()>(true);
     foo2::<()>(true);
